@@ -18,7 +18,7 @@ export function SubscribeButton({ priceId }: SubscripeButtonProps) {
       return;
     }
 
-    if (session.activeSubscription) {
+    if (session.activeSubscription) { // se o user já tiver uma subscription ativa, jogá-lo para a página de posts
       router.push('/posts')
       return;
     }

@@ -18,24 +18,24 @@ export default NextAuth({
     signingKey: process.env.SIGNIN_KEY,
   },
   callbacks: {
-    async session(session) {
+    async session(session) { // callback que permite modificar os dados da session e retornar esses dados modificados
       try {
         const userActiveSubscription = await fauna.query(
           q.Get(
-            q.Intersection([
+            q.Intersection([ // busca condicional a dois índices, se a subscription é de tal usuário e se o status dela está ativa
               q.Match(
-                q.Index('subscription_by_user_ref'),
+                q.Index('subscription_by_user_ref'), // buscar a subscription de um usuário especifico
                 q.Select(
                   "ref",
                   q.Get(
                     q.Match(
-                      q.Index('user_by_email'),
+                      q.Index('user_by_email'), // selecionando a ref do usuário que bata com o email
                       q.Casefold(session.user.email)
                     )
                   )
                 )
               ),
-              q.Match(
+              q.Match( // buscar se a subscription está ativa ou não
                 q.Index('subscription_by_status'),
                 "active"
               )
@@ -45,7 +45,7 @@ export default NextAuth({
   
         return {
           ...session,
-          activeSubsciption: userActiveSubscription
+          activeSubscription: userActiveSubscription
         }
       } catch {
         return {

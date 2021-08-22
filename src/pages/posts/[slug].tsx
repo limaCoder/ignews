@@ -38,17 +38,15 @@ export default function Post({ post }: PostProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => { // req = de onde vai puxar os cookies se o usuário está logado ou não
-  const session = await getSession({ req })
+  const session = await getSession({ req }) // recuperar sessão do usuário
   const { slug } = params; // obtendo acesso ao slug do post que é carregado
 
   console.log(session)
 
-  console.log(session?.activeSubscription)
-
-  if (!session.activeSubscription) { // se a inscrição do usuário for falsa, redirecionar o user
+  if (!session?.activeSubscription) { // se a inscrição do usuário for falsa, redirecionar o user
     return {
       redirect: {
-        destination: '/',
+        destination: `/posts/preview/${slug}`,
         permanent: false,
       },
     }

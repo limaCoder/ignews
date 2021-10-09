@@ -2,11 +2,15 @@
   max-width: 1120px;
   margin: 0 auto;
   padding: 0 2rem;
-  height: calc(100vh - 5rem);
+  height: 100vh;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  img {
+    max-width: 38rem;
+  }
 }
 
 .hero {
@@ -24,7 +28,7 @@
     margin-top: 2.5rem;
 
     span {
-      color: var(--cyan-500);
+      color: var(--purple-500);
     }
   }
 
@@ -34,12 +38,29 @@
     margin-top: 1.5rem;
 
     span {
-      color: var(--cyan-500);
+      color: var(--purple-500);
       font-weight: bold;
     }
   }
 
   button {
     margin-top: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 995px) {
+  .contentContainer {
+    padding: 2rem;
+    height: 50rem;
+    flex-direction: column-reverse; 
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .contentContainer {
+    img {
+      max-width: 100%;
+    }
   }
 }

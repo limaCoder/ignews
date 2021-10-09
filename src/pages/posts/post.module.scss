@@ -1,7 +1,7 @@
 .container {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2rem 3rem 2rem;
 }
 
 .post {
@@ -26,7 +26,8 @@
     font-size: 1.125rem;
     color: var(--gray-100);
 
-    p, ul {
+    p,
+    ul {
       margin: 1.5rem 0;
     }
 
@@ -56,7 +57,7 @@
   margin: 4rem 0 2rem;
 
   a {
-    color: var(--yellow-500);
+    color: var(--purple-500);
     margin-left: 0.5rem;
 
     &:hover {

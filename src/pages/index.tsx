@@ -1,19 +1,13 @@
-import { GetStaticProps } from 'next';
-import Image from 'next/image';
+import { GetStaticProps } from "next";
+import Image from "next/image";
 
-import Head from 'next/head';
-import { SubscribeButton } from '../components/SubscribeButton';
-import { stripe } from '../services/stripe';
+import Head from "next/head";
+import { SubscribeButton } from "../components/SubscribeButton";
+import { stripe } from "../services/stripe";
 
-import styles from './home.module.scss';
-interface HomeProps {
-  product: {
-    priceId: string;
-    amount: string;
-  }
-}
+import styles from "./home.module.scss";
 
-export default function Home({ product }: HomeProps) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -22,38 +16,19 @@ export default function Home({ product }: HomeProps) {
 
       <main className={styles.contentContainer}>
         <section className={styles.hero}>
-          <span>👏 Hey, welcome</span>
-          <h1>News about the <span>React</span> world.</h1>
+          <span>👏 Olá meu amor, seja bem-vinda!</span>
+          <h1>
+            Fique por dentro da notícias da <span>Boiola</span> World.
+          </h1>
           <p>
-            Get access to all the publications <br/>
-            <span>for {product.amount} month</span>
+            Tenha acesso a todas as publicações boiolas por
+            <br />
+            <span> mil beijinhos</span>
           </p>
-          <SubscribeButton />
         </section>
 
         <Image src="/images/avatar.svg" width={608} height={260.42} />
       </main>
     </>
-  )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const price = await stripe.prices.retrieve('price_1JioOFIXGp8OehgeDqedttoq', {
-    expand: ['product']
-  })
-
-  const product = {
-    priceId: price.id,
-    amount: new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(price.unit_amount / 100),
-  };
-
-  return {
-    props: {
-      product,
-    },
-    revalidate: 60 * 60 * 24, // 24 hours
-  }
+  );
 }
